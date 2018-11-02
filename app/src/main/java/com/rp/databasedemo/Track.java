@@ -1,6 +1,7 @@
 package com.rp.databasedemo;
 
 public class Track {
+
     private String trackId;
     private String trackName;
     private int trackRating;

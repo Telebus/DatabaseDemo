@@ -64,6 +64,7 @@ public class AddTrackActivity extends AppCompatActivity {
     }
 
     private void saveTrack(){
+
         String trackName = editTextTrackName.getText().toString().trim();
 
         int rating = seekBarRating.getProgress();
@@ -76,7 +77,7 @@ public class AddTrackActivity extends AppCompatActivity {
 
             databaseTracks.child(id).setValue(track);
 
-            Toast.makeText(this, "Track save successfully", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Track saved successfully", Toast.LENGTH_LONG).show();
 
         } else {
 

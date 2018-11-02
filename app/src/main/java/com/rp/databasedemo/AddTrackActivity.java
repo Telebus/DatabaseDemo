@@ -37,7 +37,7 @@ public class AddTrackActivity extends AppCompatActivity {
         setContentView(R.layout.activity_add_track);
 
         textViewArtistName = findViewById(R.id.textViewArtistName);
-        editTextTrackName = findViewById(R.id.editTextName);
+        editTextTrackName = findViewById(R.id.editTextTrackName);
         seekBarRating = findViewById(R.id.seekBarRating);
 
         btnAddTrack = findViewById(R.id.btnAddTrack);

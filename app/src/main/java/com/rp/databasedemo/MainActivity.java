@@ -1,10 +1,12 @@
 package com.rp.databasedemo;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +24,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
+
+    public static final String ARTIST_NAME = "artistname";
+    public static final String ARTIST_ID = "artistid";
 
     EditText editTextName;
     Button btnAddArtist;
@@ -53,6 +58,22 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 addArtist();
+
+            }
+        });
+
+        listViewArtists.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+                Artist artist = artistList.get(position);
+
+                Intent intent = new Intent(getApplicationContext(), AddTrackActivity.class);
+
+                intent.putExtra(ARTIST_ID, artist.getArtistId());
+                intent.putExtra(ARTIST_NAME, artist.getArtistName());
+
+                startActivity(intent);
 
             }
         });

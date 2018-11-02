@@ -3,9 +3,26 @@
 
     <array name="genres">
         <item>Rock</item>
-        <item>Sufi</item>
+        <item>Rap</item>
         <item>Pop</item>
-        <item>Folk</item>
+        <item>Hip-Hop</item>
+        <item>Fado</item>
+        <item>Metal</item>
+        <item>Chill</item>
+        <item>Latin</item>
+        <item>Funk</item>
+        <item>Eletronic</item>
+        <item>Dace</item>
+        <item>Acoustic</item>
+        <item>Indie</item>
+        <item>Party</item>
+        <item>Workout</item>
+        <item>Focus</item>
+        <item>Decades</item>
+        <item>K-Pop</item>
+        <item>Pride</item>
+        <item>Gaming</item>
+        <item>Holidays</item>
     </array>
 
 </resources>

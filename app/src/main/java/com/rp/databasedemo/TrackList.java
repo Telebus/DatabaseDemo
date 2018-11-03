@@ -29,7 +29,7 @@ public class TrackList extends ArrayAdapter<Track> {
 
         LayoutInflater inflater = context.getLayoutInflater();
 
-        View listViewItem = inflater.inflate(R.layout.list_layout, null, true);
+        View listViewItem = inflater.inflate(R.layout.layout_track_list, null, true);
 
         TextView textViewName = listViewItem.findViewById(R.id.textViewName);
         TextView textViewRating = listViewItem.findViewById(R.id.textViewRating);

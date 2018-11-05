@@ -144,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
 
         final Spinner spinnerGenres = dialogView.findViewById(R.id.spinnerGenres);
 
+        final Button btnDelete = dialogView.findViewById(R.id.btnDelete);
+
         dialogBuilder.setTitle("Updating Artist " + artistName);
 
         final AlertDialog alertDialog = dialogBuilder.create();
@@ -169,7 +171,33 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.dismiss();
 
             }
+
         });
+
+        btnDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                deleteArtist(artistId);
+
+                alertDialog.dismiss();
+
+            }
+
+        });
+
+    }
+
+    private void deleteArtist(String artistId){
+
+        DatabaseReference drArtist = FirebaseDatabase.getInstance().getReference("artists").child(artistId);
+
+        DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("tracks").child(artistId);
+
+        drArtist.removeValue();
+        drTracks.removeValue();
+
+        Toast.makeText(this, "Artist deleted!", Toast.LENGTH_LONG).show();
 
     }
 

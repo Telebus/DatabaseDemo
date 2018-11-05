@@ -16,11 +16,11 @@
         android:text=""
         android:hint="Enter new name" />
 
-    <Spinner
-        android:id="@+id/spinnerGenres"
+    <SeekBar
+        android:id="@+id/seekBarRating"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:entries="@array/genres"/>
+        android:max="5"/>
 
     <Button
         android:id="@+id/buttonUpdate"

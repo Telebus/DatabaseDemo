@@ -8,7 +8,7 @@
     android:orientation="vertical">
 
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTrackName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
@@ -23,13 +23,13 @@
         android:max="5"/>
 
     <Button
-        android:id="@+id/buttonUpdate"
+        android:id="@+id/btnUpdateTrack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Update" />
 
     <Button
-        android:id="@+id/btnDelete"
+        android:id="@+id/btnDeleteTrack"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete" />

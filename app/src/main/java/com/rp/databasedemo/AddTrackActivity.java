@@ -63,12 +63,12 @@ public class AddTrackActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
         tracks = new ArrayList<>();
-        String id = intent.getStringExtra(MainActivity.ARTIST_ID);
+        final String artistId = intent.getStringExtra(MainActivity.ARTIST_ID);
         String name = intent.getStringExtra(MainActivity.ARTIST_NAME);
 
         textViewArtistName.setText(name);
 
-        databaseTracks = FirebaseDatabase.getInstance().getReference("tracks").child(id);
+        databaseTracks = FirebaseDatabase.getInstance().getReference("tracks").child(artistId);
 
         btnAddTrack.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +85,7 @@ public class AddTrackActivity extends AppCompatActivity {
 
                 Track track = tracks.get(position);
 
-                showUpdateDialog(track.getTrackId(), track.getTrackName(), track.getTrackRating());
+                showUpdateDialog(artistId, track.getTrackName(), track.getTrackRating(), track.getTrackId());
 
                 return true;
 
@@ -95,7 +95,7 @@ public class AddTrackActivity extends AppCompatActivity {
 
     }
 
-    private void showUpdateDialog(final String trackId, final String trackName, final int rating){
+    private void showUpdateDialog(final String artistId, final String trackName, final int rating, final String trackId) {
 
         AlertDialog.Builder dialogBuilder = new AlertDialog.Builder(this);
 
@@ -105,37 +105,37 @@ public class AddTrackActivity extends AppCompatActivity {
 
         dialogBuilder.setView(dialogView);
 
-        final EditText editTextName = dialogView.findViewById(R.id.editTextName);
+        final EditText editTrackName = dialogView.findViewById(R.id.editTrackName);
 
-        final Button buttonUpdate = dialogView.findViewById(R.id.buttonUpdate);
+        final Button btnUpdateTrack = dialogView.findViewById(R.id.btnUpdateTrack);
 
         final SeekBar seekBarRating = dialogView.findViewById(R.id.seekBarRating);
 
         seekBarRating.setProgress(rating);
 
-        final Button btnDelete = dialogView.findViewById(R.id.btnDelete);
+        final Button btnDeleteTrack = dialogView.findViewById(R.id.btnDeleteTrack);
 
         dialogBuilder.setTitle("Updating Track " + trackName);
 
         final AlertDialog alertDialog = dialogBuilder.create();
         alertDialog.show();
 
-        buttonUpdate.setOnClickListener(new View.OnClickListener() {
+        btnUpdateTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                String name = editTextName.getText().toString().trim();
+                String name = editTrackName.getText().toString().trim();
                 int rating = seekBarRating.getProgress();
 
                 if(TextUtils.isEmpty(name)){
 
-                    editTextName.setError("Name required!");
+                    editTrackName.setError("Name required!");
 
                     return;
 
                 }
 
-                updateTrack(trackId, name, rating);
+                updateTrack(artistId, name, rating, trackId);
 
                 alertDialog.dismiss();
 
@@ -143,11 +143,11 @@ public class AddTrackActivity extends AppCompatActivity {
 
         });
 
-        btnDelete.setOnClickListener(new View.OnClickListener() {
+        btnDeleteTrack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                deleteTrack(trackId);
+                deleteTrack(trackId, artistId);
 
                 alertDialog.dismiss();
 
@@ -157,9 +157,9 @@ public class AddTrackActivity extends AppCompatActivity {
 
     }
 
-    private void deleteTrack(String trackId){
+    private void deleteTrack(String trackId, String artistId){
 
-        DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("tracks").child(trackId);
+        DatabaseReference drTracks = FirebaseDatabase.getInstance().getReference("tracks").child(artistId).child(trackId);
 
         drTracks.removeValue();
 
@@ -167,13 +167,11 @@ public class AddTrackActivity extends AppCompatActivity {
 
     }
 
-    private boolean updateTrack(String id, String name, int rating){
+    private boolean updateTrack(String artistId, String name, int rating, String trackId) {
 
-        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("tracks").child(id);
+        Track track = new Track(trackId, name, rating);
 
-        Track track = new Track(id, name, rating);
-
-        databaseReference.setValue(track);
+        databaseTracks.child(trackId).setValue(track);
 
         Toast.makeText(this, "Track updated successfully!", Toast.LENGTH_LONG).show();
 
